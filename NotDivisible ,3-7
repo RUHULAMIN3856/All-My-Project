@@ -1,0 +1,46 @@
+class Program
+    { 
+        static void Main(string[] args)
+        {
+
+            for (int i = 100; i <= 500; i++)
+            {
+                if (i % 3 != 0 && i % 7 != 0)
+                { 
+            Console.WriteLine(i);
+            i++;
+
+                  }
+               }
+           
+                Console.ReadLine();
+            
+        
+        }
+    -------------------------------------------------------------------------------------------------------------    
+        Prime  Number
+   -------------------------------------     
+        
+        
+        
+         class Program
+    {
+        static void Main(string[] args)
+        {
+            for (int i = 2; i < 100; i++)
+            {
+                int isPrime = 0;
+                for (int y = 1; y < i; y++)
+                {
+                    if (i % y == 0)
+                        isPrime++;
+                    if (isPrime == 2)
+                        break;
+                }
+                if (isPrime != 2)
+                    Console.WriteLine("\t" + i);
+                isPrime = 0;
+            }
+            Console.ReadKey();
+        }
+    }
