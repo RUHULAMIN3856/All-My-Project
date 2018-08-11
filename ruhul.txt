@@ -1,0 +1,3 @@
+git config --global user.neme "Ruhul"
+
+git config --global user.email "ruhul.amin.ra746@gmail.com"
