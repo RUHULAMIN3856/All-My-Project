@@ -1,0 +1,14 @@
+
+foreach
+
+
+ {
+    string[] myarray = { "'RUHUL'\n'Rohim'" };
+      foreach(string m in myarray)
+     {
+     Console.WriteLine(m);
+
+     }
+    Console.ReadLine();
+    }
+ }
