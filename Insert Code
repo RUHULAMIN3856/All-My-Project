@@ -1,0 +1,78 @@
+public partial class NameFrom : Form
+    {
+        public NameFrom()
+        {
+            InitializeComponent();
+        }
+        SqlConnection cnn = new SqlConnection(@"Data Source=DESKTOP-SLFRI6N;Initial Catalog=Namemanagement;Persist Security Info=True;User ID=sa;Password=cogent");
+     
+        SqlDataAdapter adp ;
+        public void clear()
+        {
+            txtid.Text = " ";
+            txtName.Text = " ";
+            txtAddress.Text = " ";
+            txtPhone.Text = " ";
+        }
+
+        private void btnsave_Click(object sender, EventArgs e)
+        {
+            cnn.Open();
+            string query = "Insert into StudentDB  Values ( '" + txtName.Text + "', '" + txtAddress.Text + "','" + txtPhone.Text + "')";
+            adp = new SqlDataAdapter(query, cnn);
+            adp.SelectCommand.ExecuteNonQuery();
+            cnn.Close();
+            MessageBox.Show("Save is succfully");
+            clear();
+        
+
+        }
+
+        private void btndelete_Click(object sender, EventArgs e)
+        {
+            cnn.Open();
+            string query = "Delete StudentDB where id = '" + txtid.Text + "'";
+            adp = new SqlDataAdapter(query, cnn);
+            adp.SelectCommand.ExecuteNonQuery();
+            cnn.Close();
+            MessageBox.Show("Delete is succfully");
+            clear();
+        }
+
+        private void btnsearch_Click(object sender, EventArgs e)
+        {
+            cnn.Open();
+            SqlCommand com = new SqlCommand("select*from StudentDB where id='" + txtid.Text + "'");
+            com.CommandType = CommandType.Text;
+            com.Connection = cnn;
+            using (SqlDataAdapter da = new SqlDataAdapter(com))
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if(dt.Rows.Count>0)
+                { 
+                txtName.Text = (dt.Rows[0]["Name"]).ToString();
+                txtAddress.Text = (dt.Rows[0]["Address"]).ToString();
+                txtPhone.Text = (dt.Rows[0]["Phone Number"]).ToString();
+                     }
+                else
+                {
+                    MessageBox.Show("There are no Data ??");
+                }
+            }
+
+                cnn.Close();
+        }
+
+        private void btnupdate_Click(object sender, EventArgs e)
+        {
+            cnn.Open();
+            string query = "Update StudentDB set Name='"+txtName.Text+"',Address='"+txtAddress.Text+"', [Phone Number]='" +txtPhone.Text+"'where id='"+txtid.Text+"'";
+
+            adp = new SqlDataAdapter(query, cnn);
+            adp.SelectCommand.ExecuteNonQuery();
+            cnn.Close();
+            MessageBox.Show("Update is succfully");
+            clear();
+        }
+    }
